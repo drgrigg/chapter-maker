@@ -1,16 +1,17 @@
 # reads a cue file and inserts chapters into the associated audio file
 
-from mutagen.id3 import ID3, CTOC, CHAP, TIT2, TPE1, TALB, APIC, CTOCFlags
-from mutagen.mp3 import MP3, error
 import cuetools
+from mutagen.id3 import ID3, CTOC, CHAP, TIT2, TPE1, TPE2, TALB, TCON, APIC, CTOCFlags
+from mutagen.mp3 import MP3, error
 import argparse
 import pathlib
+
 
 def main():
     parser = argparse.ArgumentParser(description='Process input arguments.')
     parser.add_argument('-i', '--input', help='Input .MP3 file')
-    parser.add_argument('-c', '--cuefile', help='Cue .CUE file'),
-    parser.add_argument('-p', '--picture', required=False, help='Image file (JPG or PNG)'),
+    parser.add_argument('-c', '--chapterfile', help='Chapters in a .CUE file')  # in future will add SRT and VTT files
+    parser.add_argument('-p', '--picture', required=False, help='Image file (JPG or PNG)')
 
     args = parser.parse_args()
 
@@ -29,8 +30,10 @@ def main():
         title = header.title
         performer = header.performer
         mp3_file.tags["TIT2"] = TIT2(text=[title])
-        mp3_file.tags["TALB"] = TALB(text=[title])
+        mp3_file.tags["TALB"] = TALB(text=[title])  # album name
         mp3_file.tags["TPE1"] = TPE1(text=[performer])
+        mp3_file.tags["TPE2"] = TPE2(text=[performer]) # album artist
+        mp3_file.tags["TCON"] = TCON(text=u'Books & Spoken') # genre        
 
         track: cuetools.CueTrack = None
         order = 0
