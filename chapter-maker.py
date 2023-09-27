@@ -16,10 +16,10 @@ def main():
     args = parser.parse_args()
 
     input_file = pathlib.Path(args.input)
-    cue_file = pathlib.Path(args.cuefile)
+    chapter_file = pathlib.Path(args.chapterfile)
     
-    if cue_file.exists():
-        header, tracks = cuetools.process_cuefile(cue_file)
+    if chapter_file.exists():
+        header, tracks = cuetools.process_cuefile(chapter_file)
 
     if input_file.exists():
         mp3_file = MP3(input_file, ID3=ID3)
