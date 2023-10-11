@@ -12,6 +12,9 @@ def main():
     parser.add_argument('-i', '--input', help='Input .MP3 file')
     parser.add_argument('-c', '--chapterfile', help='Chapters in a .CUE file')  # in future will add SRT and VTT files
     parser.add_argument('-p', '--picture', required=False, help='Image file (JPG or PNG)')
+    parser.add_argument('-t', '--title', required=False, help='Book title (overrides CUE header)')
+    parser.add_argument('-a', '--author', required=False, help='Author (overrides CUE header)')
+
 
     args = parser.parse_args()
 
@@ -20,6 +23,12 @@ def main():
     
     if chapter_file.exists():
         header, tracks = cuetools.process_cuefile(chapter_file)
+
+    if args.title:
+        header.title = args.title
+
+    if args.author:
+        header.performer = args.author
 
     if input_file.exists():
         mp3_file = MP3(input_file, ID3=ID3)
