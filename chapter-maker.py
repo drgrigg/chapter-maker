@@ -37,7 +37,15 @@ def main():
         toc = CTOC(element_id=u"toc", flags=CTOCFlags.TOP_LEVEL | CTOCFlags.ORDERED, child_element_ids=[], sub_frames=[TIT2(text=[u"TOC"])])
         mp3_file.tags.add(toc)
         title = header.title
-        performer = header.performer
+        if "mp3" in header.title:
+            title = input("Book title? ")
+        else:
+            title = header.title
+        if not header.performer:
+            performer = input("Author? ")
+        else:
+            performer = header.performer
+
         mp3_file.tags["TIT2"] = TIT2(text=[title])
         mp3_file.tags["TALB"] = TALB(text=[title])  # album name
         mp3_file.tags["TPE1"] = TPE1(text=[performer])

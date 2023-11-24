@@ -11,9 +11,25 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-i", "/Users/david/Music/Audio Hijack/mummy-case/the-mummy-case.mp3",
-        "-c", "/Users/david/Music/Audio Hijack/mummy-case/the-mummy-case.cue",
-    "-p", "/Users/david/Music/Audio Hijack/mummy-case/the-mummy-case.jpg"]
+            "args": ["-i", "/Users/david/Music/Audio Hijack/Children of Ruin/children-of-ruin.mp3",
+        "-c", "/Users/david/Music/Audio Hijack/Children of Ruin/children-of-ruin.cue",
+    "-p", "/Users/david/Music/Audio Hijack/Children of Ruin/children-of-ruin.jpg"]
+        },
+        {
+            "name": "TimeCalc",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-f",
+                "/Users/david/Music/Audio Hijack/Last Voice/last-voice-chaps.txt",
+                "-o",
+                "/Users/david/Music/Audio Hijack/Last Voice/last-voice-chaps.cue",
+                "-p",
+                "0"
+            ]
         }
     ]
 }
